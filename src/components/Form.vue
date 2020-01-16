@@ -29,33 +29,71 @@
                 <input type="email" v-model="user.email" />
                 <div>{{ errors.email }}</div>
             </div>
-
-            <CheckBoxItem
-                v-model="user.skills"
-                value="bem"
-                label="Методология БЭМ"
-            />
-            <CheckBoxItem v-model="user.skills" value="jQuery" label="jQuery" />
-            <CheckBoxItem v-model="user.skills" value="HAML" label="HAML" />
-            <CheckBoxItem v-model="user.skills" value="SASS" label="SASS" />
-            <CheckBoxItem v-model="user.skills" value="LESS" label="LESS" />
-            <CheckBoxItem v-model="user.skills" value="Jade" label="Jade" />
-            <CheckBoxItem v-model="user.skills" value="Stylus" label="Stylus" />
-            <CheckBoxItem
-                v-model="user.skills"
-                value="Angular"
-                label="Angular"
-            />
-            <CheckBoxItem
-                v-model="user.skills"
-                value="slicing"
-                label="Верстка рассылок"
-            />
-            <CheckBoxItem
-                v-model="user.skills"
-                value="responsive"
-                label="Адаптивная верстка"
-            />
+            <div>
+                <CheckBoxItem
+                    v-model="user.skills"
+                    value="bem"
+                    label="Методология БЭМ"
+                />
+                <CheckBoxItem
+                    v-model="user.skills"
+                    value="jQuery"
+                    label="jQuery"
+                />
+                <CheckBoxItem v-model="user.skills" value="HAML" label="HAML" />
+                <CheckBoxItem v-model="user.skills" value="SASS" label="SASS" />
+                <CheckBoxItem v-model="user.skills" value="LESS" label="LESS" />
+                <CheckBoxItem v-model="user.skills" value="Jade" label="Jade" />
+                <CheckBoxItem
+                    v-model="user.skills"
+                    value="Stylus"
+                    label="Stylus"
+                />
+                <CheckBoxItem
+                    v-model="user.skills"
+                    value="Angular"
+                    label="Angular"
+                />
+                <CheckBoxItem
+                    v-model="user.skills"
+                    value="slicing"
+                    label="Верстка рассылок"
+                />
+                <CheckBoxItem
+                    v-model="user.skills"
+                    value="responsive"
+                    label="Адаптивная верстка"
+                />
+            </div>
+            <div>
+                <h2>Уровень владения JavaScript</h2>
+                <div class="scale__container">
+                    <ScaleItem
+                        v-model="user.scale"
+                        value="0"
+                        label="Не владею"
+                        mark="big"
+                    />
+                    <ScaleItem
+                        v-model="user.scale"
+                        value="1"
+                        label="Использую готовые решения"
+                        mark="small"
+                    />
+                    <ScaleItem
+                        v-model="user.scale"
+                        value="2"
+                        label="Использую готовые решения и уменю их переделывать"
+                        mark="small"
+                    />
+                    <ScaleItem
+                        v-model="user.scale"
+                        value="3"
+                        label="Пишу сложный JS с нуля"
+                        mark="big"
+                    />
+                </div>
+            </div>
             <div>
                 <label>Дата заполнения</label>
                 <input v-model="user.date" />
@@ -69,13 +107,13 @@
 <script>
 // import { validateName, validateBirthYear,  validateSkype, validateMail} from "../utils/validation";
 import CheckBoxItem from "./CheckBoxItem";
-// import Scale from "./Scale";
+import ScaleItem from "./ScaleItem";
 
 export default {
     name: "Form",
     components: {
-        CheckBoxItem
-        // Scale
+        CheckBoxItem,
+        ScaleItem
     },
     data() {
         return {
@@ -86,7 +124,7 @@ export default {
                 skype: "",
                 email: "",
                 skills: [],
-                scale: 1,
+                scale: "1",
                 date: ""
             },
             valid: true,
