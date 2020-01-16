@@ -1,6 +1,86 @@
 <template lang="html">
-    <div class="container"></div>
+    <div class="container">
+        <img src="../assets/logo.png" alt="iogroup" />
+        <h1>Дело</h1>
+
+        <form @submit="checkForm" method="post">
+            <div>
+                <label>Полное ФИО</label>
+                <input type="text" v-model="user.name" />
+                <div>{{ errors.name }}</div>
+            </div>
+            <div>
+                <label>Год рождения</label>
+                <input type="number" v-model="user.year" />
+                <div>{{ errors.year }}</div>
+            </div>
+            <div>
+                <label>Место жительства</label>
+                <input v-model="user.town" />
+                <div>{{ errors.town }}</div>
+            </div>
+            <div>
+                <label>Скайп</label>
+                <input v-model="user.skype" />
+                <div>{{ errors.skype }}</div>
+            </div>
+            <div>
+                <label>Почта</label>
+                <input type="email" v-model="user.email" />
+                <div>{{ errors.email }}</div>
+            </div>
+            <div>
+                <label>Дата заполнения</label>
+                <input v-model="user.date" />
+                <div>{{ errors.date }}</div>
+            </div>
+            <button type="submit">Отправить</button>
+        </form>
+    </div>
 </template>
+
+<script>
+// import { validateName, validateBirthYear,  validateSkype, validateMail} from "../utils/validation";
+// import CheckBoxes from "./CheckBoxes";
+// import Scale from "./Scale";
+
+export default {
+    name: "Form",
+    components: {
+        // CheckBoxes,
+        // Scale
+    },
+    data() {
+        return {
+            user: {
+                name: "",
+                year: "",
+                town: "",
+                skype: "",
+                email: "",
+                skills: [],
+                scale: 1,
+                date: ""
+            },
+            valid: true,
+            errors: {}
+        };
+    },
+    methods: {
+        checkForm() {
+            // this.errors = {};
+            // const validName = validateName(this.user.name);
+            // this.errors.name = validName.error;
+            // if (this.valid) {
+            //     this.valid = validName.valid;
+            // }
+            // if (this.valid) {
+            //     alert("Анкета успешно заполнена\n\n" + JSON.stringify(this.user));
+            // }
+        }
+    }
+};
+</script>
 
 <style lang="scss" scoped>
 .container {
