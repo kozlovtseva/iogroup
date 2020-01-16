@@ -3,7 +3,7 @@
         <img src="../assets/logo.png" alt="iogroup" />
         <h1>Дело</h1>
 
-        <form @submit="checkForm" method="post">
+        <form @submit.prevent="checkForm" method="post">
             <div>
                 <label>Полное ФИО</label>
                 <input type="text" v-model="user.name" />
@@ -29,6 +29,33 @@
                 <input type="email" v-model="user.email" />
                 <div>{{ errors.email }}</div>
             </div>
+
+            <CheckBoxItem
+                v-model="user.skills"
+                value="bem"
+                label="Методология БЭМ"
+            />
+            <CheckBoxItem v-model="user.skills" value="jQuery" label="jQuery" />
+            <CheckBoxItem v-model="user.skills" value="HAML" label="HAML" />
+            <CheckBoxItem v-model="user.skills" value="SASS" label="SASS" />
+            <CheckBoxItem v-model="user.skills" value="LESS" label="LESS" />
+            <CheckBoxItem v-model="user.skills" value="Jade" label="Jade" />
+            <CheckBoxItem v-model="user.skills" value="Stylus" label="Stylus" />
+            <CheckBoxItem
+                v-model="user.skills"
+                value="Angular"
+                label="Angular"
+            />
+            <CheckBoxItem
+                v-model="user.skills"
+                value="slicing"
+                label="Верстка рассылок"
+            />
+            <CheckBoxItem
+                v-model="user.skills"
+                value="responsive"
+                label="Адаптивная верстка"
+            />
             <div>
                 <label>Дата заполнения</label>
                 <input v-model="user.date" />
@@ -41,13 +68,13 @@
 
 <script>
 // import { validateName, validateBirthYear,  validateSkype, validateMail} from "../utils/validation";
-// import CheckBoxes from "./CheckBoxes";
+import CheckBoxItem from "./CheckBoxItem";
 // import Scale from "./Scale";
 
 export default {
     name: "Form",
     components: {
-        // CheckBoxes,
+        CheckBoxItem
         // Scale
     },
     data() {
@@ -74,9 +101,11 @@ export default {
             // if (this.valid) {
             //     this.valid = validName.valid;
             // }
-            // if (this.valid) {
-            //     alert("Анкета успешно заполнена\n\n" + JSON.stringify(this.user));
-            // }
+            if (this.valid) {
+                alert(
+                    "Анкета успешно заполнена\n\n" + JSON.stringify(this.user)
+                );
+            }
         }
     }
 };
