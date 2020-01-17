@@ -27,8 +27,9 @@ export default {
     height: 100vh;
     margin-top: 0;
 }
-html {
+* {
     box-sizing: border-box;
+    margin: 0;
     outline: none;
 }
 </style>

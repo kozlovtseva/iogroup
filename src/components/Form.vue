@@ -1,35 +1,63 @@
 <template lang="html">
     <div class="container">
-        <img src="../assets/logo.png" alt="iogroup" />
-        <h1>Дело</h1>
+        <img class="logo" src="../assets/logo.png" alt="iogroup" />
+        <h1 class="title">Дело</h1>
 
-        <form @submit.prevent="checkForm" method="post">
-            <div>
-                <label>Полное ФИО</label>
-                <input v-model="user.name" />
-                <div>{{ errors.name }}</div>
+        <form @submit.prevent="checkForm" method="post" class="form">
+            <div class="form__item">
+                <label class="form__label">Полное ФИО</label>
+                <input
+                    class="form__input"
+                    v-model="user.name"
+                    placeholder="Иванов Иван Иванович"
+                />
             </div>
-            <div>
-                <label>Год рождения</label>
-                <input v-model="user.year" />
-                <div>{{ errors.year }}</div>
+            <div class="form__error">{{ errors.name }}</div>
+            <div class="form__item">
+                <label class="form__label">Год рождения</label>
+                <input
+                    class="form__input"
+                    v-model="user.year"
+                    placeholder="1990"
+                />
             </div>
-            <div>
-                <label>Место жительства</label>
-                <input v-model="user.town" />
-                <div>{{ errors.town }}</div>
+            <div class="form__error">{{ errors.year }}</div>
+            <div class="form__item">
+                <label class="form__label">Место жительства</label>
+                <input
+                    class="form__input"
+                    v-model="user.town"
+                    placeholder="г. Томск"
+                />
             </div>
-            <div>
-                <label>Скайп</label>
-                <input v-model="user.skype" />
-                <div>{{ errors.skype }}</div>
+            <div class="form__error">{{ errors.town }}</div>
+            <div class="form__item">
+                <label class="form__label">Скайп</label>
+                <input
+                    class="form__input"
+                    v-model="user.skype"
+                    placeholder="ivanov"
+                />
             </div>
-            <div>
-                <label>Почта</label>
-                <input v-model="user.email" />
-                <div>{{ errors.email }}</div>
+            <div class="form__error">{{ errors.skype }}</div>
+            <div class="form__item">
+                <label class="form__label">Почта</label>
+                <input
+                    class="form__input"
+                    v-model="user.email"
+                    placeholder="ivanov@gmail.com"
+                />
             </div>
-            <div>
+            <div class="form__error">{{ errors.email }}</div>
+            <h3 class="form__subtitle">Расскажите о себе чекбоксами</h3>
+            <p class="form__text">
+                Отметьте чекбоксами пункты, которые соответствуют вашим
+                скиллами. Отсутствие опыта не означает, что у вас меньше шансов
+                стать одним из наших товарищей. Это означает, что вы будете
+                получать те задачи, с которыми гарантированно будете
+                справляться.
+            </p>
+            <div class="checkboxes">
                 <CheckBoxItem
                     v-model="user.skills"
                     value="bem"
@@ -66,7 +94,7 @@
                 />
             </div>
             <div>
-                <h2>Уровень владения JavaScript</h2>
+                <h3 class="form__subtitle">Уровень владения JavaScript</h3>
                 <div class="scale__container">
                     <ScaleItem
                         v-model="user.scale"
@@ -90,16 +118,20 @@
                         v-model="user.scale"
                         value="3"
                         label="Пишу сложный JS с нуля"
-                        mark="big"
+                        mark="big_last"
                     />
                 </div>
             </div>
-            <div>
-                <label>Дата заполнения</label>
-                <input v-model="user.date" />
-                <div>{{ errors.date }}</div>
+            <div class="form__item">
+                <label class="form__label">Дата заполнения</label>
+                <input
+                    class="form__input form__input_date"
+                    v-model="user.date"
+                    placeholder="01.01.2017"
+                />
             </div>
-            <button type="submit">Отправить</button>
+            <div class="form__error">{{ errors.date }}</div>
+            <button class="form__button" type="submit">Отправить</button>
         </form>
     </div>
 </template>
@@ -175,10 +207,101 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$base-color: #400749;
+$primary-color: #610c5d;
+@import url("https://fonts.googleapis.com/css?family=PT+Sans+Caption:700|Roboto|Roboto+Slab:100&display=swap");
 .container {
     background-image: url("../assets/back.jpg");
     height: 100%;
     margin: 0 auto;
+    padding: 30px 60px;
+    text-align: left;
     width: 45vw;
+}
+.logo {
+    width: 60px;
+}
+.title {
+    color: $base-color;
+    font-family: "PT Sans Caption", sans-serif;
+    font-size: 42px;
+    margin: 10px 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+.checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+}
+.form {
+    &__item {
+        display: flex;
+    }
+    &__label {
+        align-items: flex-end;
+        color: #150101;
+        display: flex;
+        font-family: "Roboto", sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        margin-right: 10px;
+        white-space: nowrap;
+    }
+    &__input {
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid $primary-color;
+        color: #1a1919;
+        font-family: "Roboto Slab", serif;
+        font-size: 20px;
+        padding-left: 5px;
+        width: 100%;
+        &_date {
+            width: 30%;
+        }
+    }
+    &__error {
+        color: #7d1830;
+        font-family: "Roboto", sans-serif;
+        font-size: 10px;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+    &__subtitle {
+        color: #150101;
+        font-family: "Roboto", sans-serif;
+        font-size: 17px;
+        margin-top: 20px;
+    }
+    &__text {
+        color: #525252;
+        font-family: "Roboto", sans-serif;
+        font-size: 10px;
+        margin-bottom: 15px;
+    }
+    &__button {
+        background: transparent;
+        border: 1px solid $primary-color;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        color: #150101;
+        cursor: pointer;
+        float: right;
+        font-family: "Roboto", sans-serif;
+        font-size: 14px;
+        font-weight: bold;
+        height: 30px;
+        line-height: 25px;
+        text-align: center;
+        width: 150px;
+        &:hover {
+            background-color: $primary-color;
+        }
+    }
+}
+.scale__container {
+    color: $base-color;
+    display: flex;
+    border-top: 1px solid $primary-color;
+    margin: 20px 0;
 }
 </style>
