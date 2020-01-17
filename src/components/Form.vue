@@ -6,12 +6,12 @@
         <form @submit.prevent="checkForm" method="post">
             <div>
                 <label>Полное ФИО</label>
-                <input type="text" v-model="user.name" />
+                <input v-model="user.name" />
                 <div>{{ errors.name }}</div>
             </div>
             <div>
                 <label>Год рождения</label>
-                <input type="number" v-model="user.year" />
+                <input v-model="user.year" />
                 <div>{{ errors.year }}</div>
             </div>
             <div>
@@ -26,7 +26,7 @@
             </div>
             <div>
                 <label>Почта</label>
-                <input type="email" v-model="user.email" />
+                <input v-model="user.email" />
                 <div>{{ errors.email }}</div>
             </div>
             <div>
@@ -105,7 +105,14 @@
 </template>
 
 <script>
-// import { validateName, validateBirthYear,  validateSkype, validateMail} from "../utils/validation";
+import {
+    validateName,
+    validateBirthYear,
+    validateTown,
+    validateSkype,
+    validateEmail,
+    validateDate
+} from "../utils/validation";
 import CheckBoxItem from "./CheckBoxItem";
 import ScaleItem from "./ScaleItem";
 
@@ -133,12 +140,30 @@ export default {
     },
     methods: {
         checkForm() {
-            // this.errors = {};
-            // const validName = validateName(this.user.name);
-            // this.errors.name = validName.error;
-            // if (this.valid) {
-            //     this.valid = validName.valid;
-            // }
+            this.errors = {};
+            const validName = validateName(this.user.name);
+            this.errors.name = validName.error;
+            this.valid = validName.valid;
+
+            const validYear = validateBirthYear(this.user.year);
+            this.errors.year = validYear.error;
+            this.valid = validYear.valid;
+
+            const validTown = validateTown(this.user.town);
+            this.errors.town = validTown.error;
+            this.valid = validTown.valid;
+
+            const validSkype = validateSkype(this.user.skype);
+            this.errors.skype = validSkype.error;
+            this.valid = validSkype.valid;
+
+            const validEmail = validateEmail(this.user.email);
+            this.errors.email = validEmail.error;
+            this.valid = validEmail.valid;
+
+            const validDate = validateDate(this.user.date);
+            this.errors.date = validDate.error;
+            this.valid = validDate.valid;
             if (this.valid) {
                 alert(
                     "Анкета успешно заполнена\n\n" + JSON.stringify(this.user)
